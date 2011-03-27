@@ -3,6 +3,10 @@
             xmlns:m="http://ant.apache.org/ivy/maven"
             xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd">
 
+    <license name="GNU GENERAL PUBLIC LICENSE Version 3"
+            url="http://www.gnu.org/licenses/gpl-3.0.txt"/>
+    <repository name="codegeo.org - Apache Archiva" url="http://codegeo.org/archiva"/>
+
     <info organisation="nz.org.geonet" module="hazbus-xslt" revision="2.0"/>
 
     <configurations>
@@ -73,7 +77,7 @@
 
         <dependency org="junit" name="junit" rev="4.7" conf="test->default"/>
 
-         <dependency org="com.cenqua.clover" name="clover" rev="latest." conf="optional->default"/>
+        <dependency org="com.cenqua.clover" name="clover" rev="latest." conf="optional->default"/>
 
     </dependencies>
 

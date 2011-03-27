@@ -13,9 +13,25 @@
     http://www.mulesource.org/schema/mule/xml/2.2 http://www.mulesource.org/schema/mule/xml/2.2/mule-xml.xsd
     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
-<description>
-    Testing config for XSLT.
-</description>
+    <description> Testing config for XSLT. </description>
+
+    <!--  
+        Copyright 2010, Institute of Geological & Nuclear Sciences Ltd or
+        third-party contributors as indicated by the @author tags.
+        
+        This program is free software: you can redistribute it and/or modify
+        it under the terms of the GNU General Public License as published by
+        the Free Software Foundation, either version 3 of the License, or
+        at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful,
+        but WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+        GNU General Public License for more details.
+        
+        You should have received a copy of the GNU General Public License
+        along with this program.  If not, see <http://www.gnu.org/licenses/>.
+    -->
 
     <xm:xslt-transformer name="haz-to-sc3-v0.3"
         xsl-file="nz/org/geonet/esb/event/xslt/haz/haztosc3v0.3.xslt">
@@ -24,15 +40,18 @@
         <xm:context-property key="mode" value="manual"/>
         <xm:context-property key="magStationCount" value="999"/>
     </xm:xslt-transformer>
-    
-    <xm:xslt-transformer name="remove-namespace" xsl-file="nz/org/geonet/esb/event/xslt/remove-namespace.xslt"></xm:xslt-transformer>
-    
-    <xm:xslt-transformer name="sc3-v0.3-to-simple-event" xsl-file="nz/org/geonet/esb/event/xslt/sc3/sc3v0.3toevent.xslt"/>
 
-    <xm:xslt-transformer name="haz-to-simple-event" xsl-file="nz/org/geonet/esb/event/xslt/haz/haztoevent.xslt">
+    <xm:xslt-transformer name="remove-namespace"
+        xsl-file="nz/org/geonet/esb/event/xslt/remove-namespace.xslt"/>
+
+    <xm:xslt-transformer name="sc3-v0.3-to-simple-event"
+        xsl-file="nz/org/geonet/esb/event/xslt/sc3/sc3v0.3toevent.xslt"/>
+
+    <xm:xslt-transformer name="haz-to-simple-event"
+        xsl-file="nz/org/geonet/esb/event/xslt/haz/haztoevent.xslt">
         <xm:context-property key="mode" value="manual"/>
     </xm:xslt-transformer>
-    
+
     <model name="main">
         <service name="haz-to-sc3-version-0.3">
             <inbound>
@@ -80,5 +99,5 @@
             </outbound>
         </service>
 
-    </model> 
+    </model>
 </mule>
