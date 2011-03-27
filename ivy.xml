@@ -1,0 +1,78 @@
+
+<ivy-module version="2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns:m="http://ant.apache.org/ivy/maven"
+            xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd">
+
+    <info organisation="nz.org.geonet" module="hazbus-xslt" revision="2.0"/>
+
+    <configurations>
+
+        <conf name="default" visibility="public"
+              description="runtime dependencies and master artifact can be used with this conf"
+              extends="runtime,master"/>
+
+        <conf name="master" visibility="public"
+              description="contains only the artifact published by this module itself, with no transitive dependencies"/>
+
+        <conf name="compile" visibility="public"
+              description="this is the default scope, used if none is specified. Compile dependencies are available in all classpaths."/>
+
+        <conf name="provided" visibility="public"
+              description="this is much like compile, but indicates you expect the JDK or a container to provide it. It is only available on the compilation classpath, and is not transitive."/>
+
+        <conf name="runtime" visibility="public"
+              description="this scope indicates that the dependency is not required for compilation, but is for execution. It is in the runtime and test classpaths, but not the compile classpath."
+              extends="compile"/>
+
+        <conf name="test" visibility="private"
+              description="this scope indicates that the dependency is not required for normal use of the application, and is only available for the test compilation and execution phases."
+              extends="runtime"/>
+
+        <conf name="system" visibility="public"
+              description="this scope is similar to provided except that you have to provide the JAR which contains it explicitly. The artifact is always available and is not looked up in a repository."/>
+
+        <conf name="sources" visibility="public"
+              description="this configuration contains the source artifact of this module, if any."/>
+
+        <conf name="javadoc" visibility="public"
+              description="this configuration contains the javadoc artifact of this module, if any."/>
+
+        <conf name="foride" visibility="private" description="this configuration contains the source
+              and/or javadoc artifacts of this modules dependecies for use to provide documentation in IDE."/>
+
+        <conf name="optional" visibility="public" description="contains all optional dependencies"/>
+
+    </configurations>
+
+    <publications>
+        <artifact name="hazbus-xslt" type="jar" ext="jar" conf="master"/>
+        <artifact name="hazbus-xslt" type="source" ext="jar" conf="sources" m:classifier="sources"/>
+        <artifact name="hazbus-xslt" type="doc" ext="jar" conf="javadoc" m:classifier="javadoc"/>
+    </publications>
+
+    <dependencies>
+
+        <dependency org="org.mule.modules" name="mule-module-client" rev="2.2.1" conf="test->default"/>
+        <dependency org="org.mule.modules" name="mule-module-xml" rev="2.2.1" conf="test->default"/>
+
+        <!-- mule-tests-functional declares a dep on mule-core but in classifier 'tests', this
+        clobbors mule-core and breaks the build.  Exclude all mule-core and then fetch mule-core
+        with both artifacts -->
+        <dependency org="org.mule.tests" name="mule-tests-functional" rev="2.2.0" conf="test->default;foride->sources">
+            <exclude module="mule-core" />
+        </dependency>
+        <dependency org="org.mule" name="mule-core" rev="2.2.1" force="true" conf="test->default;foride->sources">
+            <artifact name="mule-core" type="test-jar" ext="jar" m:classifier="tests"/>
+            <artifact name="mule-core" ext="jar"/>
+        </dependency>
+
+        <dependency org="org.mule.transports" name="mule-transport-vm" rev="2.2.1" conf="test->default"/>
+        <dependency org="org.mule.transports" name="mule-transport-stdio" rev="2.2.1" conf="test->default"/>
+
+        <dependency org="xmlunit" name="xmlunit" rev="1.3" conf="test->default;foride->sources"/>
+
+        <dependency org="junit" name="junit" rev="4.7" conf="test->default"/>
+        
+    </dependencies>
+
+</ivy-module>

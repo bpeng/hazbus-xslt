@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns="http://www.mulesource.org/schema/mule/core/2.2"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:mule="http://www.mulesource.org/schema/mule/core/2.2"
+    xmlns:xm="http://www.mulesource.org/schema/mule/xml/2.2"
+    xmlns:vm="http://www.mulesource.org/schema/mule/vm/2.2"
+    xmlns:stdio="http://www.mulesource.org/schema/mule/stdio/2.2"
+    xmlns:spring="http://www.springframework.org/schema/beans"
+    xsi:schemaLocation="
+    http://www.mulesource.org/schema/mule/core/2.2 http://www.mulesource.org/schema/mule/core/2.2/mule.xsd
+    http://www.mulesource.org/schema/mule/vm/2.2 http://www.mulesource.org/schema/mule/vm/2.2/mule-vm.xsd
+    http://www.mulesource.org/schema/mule/stdio/2.2 http://www.mulesource.org/schema/mule/stdio/2.2/mule-stdio.xsd
+    http://www.mulesource.org/schema/mule/xml/2.2 http://www.mulesource.org/schema/mule/xml/2.2/mule-xml.xsd
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+<description>
+    Testing config for XSLT.
+</description>
+
+    <xm:xslt-transformer name="haz-to-sc3-v0.3"
+        xsl-file="nz/org/geonet/esb/event/xslt/haz/haztosc3v0.3.xslt">
+        <xm:context-property key="agency" value="WEL"/>
+        <xm:context-property key="author" value="CUSP"/>
+        <xm:context-property key="mode" value="manual"/>
+        <xm:context-property key="magStationCount" value="999"/>
+    </xm:xslt-transformer>
+    
+    <xm:xslt-transformer name="remove-namespace" xsl-file="nz/org/geonet/esb/event/xslt/remove-namespace.xslt"></xm:xslt-transformer>
+    
+    <xm:xslt-transformer name="sc3-v0.3-to-simple-event" xsl-file="nz/org/geonet/esb/event/xslt/sc3/sc3v0.3toevent.xslt"/>
+
+    <xm:xslt-transformer name="haz-to-simple-event" xsl-file="nz/org/geonet/esb/event/xslt/haz/haztoevent.xslt">
+        <xm:context-property key="mode" value="manual"/>
+    </xm:xslt-transformer>
+    
+    <model name="main">
+        <service name="haz-to-sc3-version-0.3">
+            <inbound>
+                <!-- this endpoint is used by the functional test -->
+                <vm:inbound-endpoint path="haz-to-sc3.v0.3.in" synchronous="true">
+                    <transformer ref="haz-to-sc3-v0.3"/>
+                </vm:inbound-endpoint>
+            </inbound>
+            <echo-component/>
+            <outbound>
+                <pass-through-router>
+                    <stdio:outbound-endpoint system="OUT"/>
+                </pass-through-router>
+            </outbound>
+        </service>
+
+        <service name="sc3-v0.3-to-event">
+            <inbound>
+                <!-- this endpoint is used by the functional test -->
+                <vm:inbound-endpoint path="sc3-v0.3-to-simple-event.in" synchronous="true">
+                    <transformer ref="remove-namespace"/>
+                    <transformer ref="sc3-v0.3-to-simple-event"/>
+                </vm:inbound-endpoint>
+            </inbound>
+            <echo-component/>
+            <outbound>
+                <pass-through-router>
+                    <stdio:outbound-endpoint system="OUT"/>
+                </pass-through-router>
+            </outbound>
+        </service>
+
+        <service name="haz-to-event">
+            <inbound>
+                <!-- this endpoint is used by the functional test -->
+                <vm:inbound-endpoint path="haz-to-event.in" synchronous="true">
+                    <transformer ref="haz-to-simple-event"/>
+                </vm:inbound-endpoint>
+            </inbound>
+            <echo-component/>
+            <outbound>
+                <pass-through-router>
+                    <stdio:outbound-endpoint system="OUT"/>
+                </pass-through-router>
+            </outbound>
+        </service>
+
+    </model> 
+</mule>
