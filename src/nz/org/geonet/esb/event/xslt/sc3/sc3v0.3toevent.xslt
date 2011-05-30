@@ -25,7 +25,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 <!-- 
 xslt template to transform quake events in seiscomp3 xml document into simple event xml
  -->
-    <xsl:output method="xml" encoding="UTF-8" indent="yes"/>
+    <xsl:output method="xml" encoding="UTF-8" indent="yes" standalone="yes"/>
    
     <xsl:template match="/seiscomp">
         <xsl:apply-templates select="EventParameters/event"/>

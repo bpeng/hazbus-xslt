@@ -33,46 +33,14 @@
         along with this program.  If not, see <http://www.gnu.org/licenses/>.
     -->
 
-    <xm:xslt-transformer name="haz-to-sc3-v0.3"
-        xsl-file="nz/org/geonet/esb/event/xslt/haz/haztosc3v0.3.xslt">
-        <xm:context-property key="agency" value="WEL"/>
-        <xm:context-property key="author" value="CUSP"/>
-        <xm:context-property key="mode" value="manual"/>
-        <xm:context-property key="magStationCount" value="999"/>
-    </xm:xslt-transformer>
-
- <!--   <xm:xslt-transformer name="remove-namespace"
-        xsl-file="nz/org/geonet/esb/event/xslt/remove-namespace.xslt"/>-->
-
-    <xm:xslt-transformer name="sc3-v0.3-to-simple-event"
+     <xm:xslt-transformer name="sc3-v0.3-to-simple-event"
         xsl-file="nz/org/geonet/esb/event/xslt/sc3/sc3v0.3toevent.xslt"/>
 
-    <xm:xslt-transformer name="haz-to-simple-event"
-        xsl-file="nz/org/geonet/esb/event/xslt/haz/haztoevent.xslt">
-        <xm:context-property key="mode" value="manual"/>
-    </xm:xslt-transformer>
-
     <model name="main">
-        <service name="haz-to-sc3-version-0.3">
-            <inbound>
-                <!-- this endpoint is used by the functional test -->
-                <vm:inbound-endpoint path="haz-to-sc3.v0.3.in" synchronous="true">
-                    <transformer ref="haz-to-sc3-v0.3"/>
-                </vm:inbound-endpoint>
-            </inbound>
-            <echo-component/>
-            <outbound>
-                <pass-through-router>
-                    <stdio:outbound-endpoint system="OUT"/>
-                </pass-through-router>
-            </outbound>
-        </service>
-
         <service name="sc3-v0.3-to-event">
             <inbound>
                 <!-- this endpoint is used by the functional test -->
                 <vm:inbound-endpoint path="sc3-v0.3-to-simple-event.in" synchronous="true">
-<!--                    <transformer ref="remove-namespace"/>-->
                     <transformer ref="sc3-v0.3-to-simple-event"/>
                 </vm:inbound-endpoint>
             </inbound>
@@ -83,21 +51,5 @@
                 </pass-through-router>
             </outbound>
         </service>
-
-        <service name="haz-to-event">
-            <inbound>
-                <!-- this endpoint is used by the functional test -->
-                <vm:inbound-endpoint path="haz-to-event.in" synchronous="true">
-                    <transformer ref="haz-to-simple-event"/>
-                </vm:inbound-endpoint>
-            </inbound>
-            <echo-component/>
-            <outbound>
-                <pass-through-router>
-                    <stdio:outbound-endpoint system="OUT"/>
-                </pass-through-router>
-            </outbound>
-        </service>
-
     </model>
 </mule>

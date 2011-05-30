@@ -1,47 +1,47 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <event publicID="gns2010dwue">
-<creationInfo>
-<agencyID>GNS</agencyID>
-<author>scevent@screplay1.gns.cri.nz</author>
-<creationTime>2011-01-26T02:52:34.447791Z</creationTime>
-</creationInfo>
-<description>
-<text>Off W. Coast of S. Island, N.Z.</text>
-</description>
+    <creationInfo>
+        <agencyID>GNS</agencyID>
+        <author>scevent@screplay1.gns.cri.nz</author>
+        <creationTime>2011-01-26T02:52:34.447791Z</creationTime>
+    </creationInfo>
+    <description>
+        <text>Off W. Coast of S. Island, N.Z.</text>
+    </description>
 
-<origin>
-<creationInfo>
-<creationTime>2011-01-26T02:52:41.308005Z</creationTime>
-</creationInfo>
-<time>
-<value>2010-02-25T04:38:43.663583Z</value>
-</time>
-<latitude>
-<value>-46.223454</value>
-</latitude>
-<longitude>
-<value>166.72148</value>
-</longitude>
-<depth>
-<value>10</value>
-</depth>
+    <origin>
+        <creationInfo>
+            <creationTime>2011-01-26T02:52:41.308005Z</creationTime>
+        </creationInfo>
+        <time>
+            <value>2010-02-25T04:38:43.663583Z</value>
+        </time>
+        <latitude>
+            <value>-46.223454</value>
+        </latitude>
+        <longitude>
+            <value>166.72148</value>
+        </longitude>
+        <depth>
+            <value>10</value>
+        </depth>
 
-<evaluationMode>automatic</evaluationMode>
-<evaluationStatus/>
+        <evaluationMode>automatic</evaluationMode>
+        <evaluationStatus/>
 
-<magnitude>
+        <magnitude>
 
-<creationInfo>
-<creationTime>2011-01-26T02:52:41.32952Z</creationTime>
-</creationInfo>
+            <creationInfo>
+                <creationTime>2011-01-26T02:52:41.32952Z</creationTime>
+            </creationInfo>
 
-<magnitude>
-<value>5.5178546</value>
-</magnitude>
+            <magnitude>
+                <value>5.5178546</value>
+            </magnitude>
 
-<type>MLv</type>
+            <type>MLv</type>
 
-</magnitude>
+        </magnitude>
 
-</origin>
+    </origin>
 </event>
