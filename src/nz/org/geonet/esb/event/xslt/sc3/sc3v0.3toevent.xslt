@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:sc3="http://geofon.gfz-potsdam.de/ns/seiscomp3-schema/0.3"
+    xpath-default-namespace="http://geofon.gfz-potsdam.de/ns/seiscomp3-schema/0.3">
     
 <!--  
 Copyright 2010, Institute of Geological & Nuclear Sciences Ltd or

@@ -41,8 +41,8 @@
         <xm:context-property key="magStationCount" value="999"/>
     </xm:xslt-transformer>
 
-    <xm:xslt-transformer name="remove-namespace"
-        xsl-file="nz/org/geonet/esb/event/xslt/remove-namespace.xslt"/>
+ <!--   <xm:xslt-transformer name="remove-namespace"
+        xsl-file="nz/org/geonet/esb/event/xslt/remove-namespace.xslt"/>-->
 
     <xm:xslt-transformer name="sc3-v0.3-to-simple-event"
         xsl-file="nz/org/geonet/esb/event/xslt/sc3/sc3v0.3toevent.xslt"/>
@@ -72,7 +72,7 @@
             <inbound>
                 <!-- this endpoint is used by the functional test -->
                 <vm:inbound-endpoint path="sc3-v0.3-to-simple-event.in" synchronous="true">
-                    <transformer ref="remove-namespace"/>
+<!--                    <transformer ref="remove-namespace"/>-->
                     <transformer ref="sc3-v0.3-to-simple-event"/>
                 </vm:inbound-endpoint>
             </inbound>
