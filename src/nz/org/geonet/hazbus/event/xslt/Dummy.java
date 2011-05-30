@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package nz.org.geonet.esb.event.xslt;
+package nz.org.geonet.hazbus.event.xslt;
 
 /**
  *

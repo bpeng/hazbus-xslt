@@ -44,18 +44,20 @@ xslt template to transform quake events in seiscomp3 xml document into simple ev
                 <xsl:element name="agencyID">
                     <xsl:value-of select="creationInfo/agencyID"/>
                 </xsl:element>
-                <xsl:element name="author">
-                    <xsl:value-of select="creationInfo/author"/>
-                </xsl:element>
-                <xsl:element name="creationTime">
-                    <xsl:value-of select="creationInfo/creationTime"/>
-                </xsl:element>
-            </xsl:element>
+   
+                <xsl:variable name="dt"
+                    select="xs:dateTime(creationInfo/creationTime), 
+                    xs:dateTime(creationInfo/modificationTime),
+                    xs:dateTime(/seiscomp/EventParameters/origin[@publicID=$preferredOriginID]/creationInfo/creationTime),
+                    xs:dateTime(/seiscomp/EventParameters/origin[@publicID=$preferredOriginID]/creationInfo/modificationTime),
+                    xs:dateTime(/seiscomp/EventParameters/origin[@publicID=$preferredOriginID]/magnitude[@publicID=$preferredMagnitudeID]/creationInfo/creationTime),
+                    xs:dateTime(/seiscomp/EventParameters/origin[@publicID=$preferredOriginID]/magnitude[@publicID=$preferredMagnitudeID]/creationInfo/modificationTime)"
+                />
 
-            <xsl:element name="description">
-                <xsl:element name="text">
-                    <xsl:value-of select="description/text"/>
+                <xsl:element name="updateTime">
+                    <xsl:value-of select="max($dt)"/>
                 </xsl:element>
+
             </xsl:element>
 
             <xsl:apply-templates select="../origin">
@@ -72,16 +74,10 @@ xslt template to transform quake events in seiscomp3 xml document into simple ev
         <xsl:param name="preferredMagnitudeID"/>
         <xsl:param name="publicID"/>
 
-        <!-- transform the preferred origin -->
-        <xsl:if test="@publicID=$preferredOriginID">
+           <xsl:if test="@publicID=$preferredOriginID">
             
-            <xsl:element name="origin">
-                <xsl:element name="creationInfo">
-                    <xsl:element name="creationTime">
-                        <xsl:value-of select="creationInfo/creationTime"/>
-                    </xsl:element>
-                </xsl:element>
-
+            <xsl:element name="preferredOrigin">
+ 
                 <xsl:element name="time">
                     <xsl:element name="value">
                         <xsl:value-of select="time/value"/>
@@ -124,16 +120,10 @@ xslt template to transform quake events in seiscomp3 xml document into simple ev
 
     <xsl:template match="magnitude">
         <xsl:param name="preferredMagnitudeID"/>
-        <!-- transform the preferred magnitude -->
+ 
         <xsl:if test="@publicID=$preferredMagnitudeID">
             
-            <xsl:element name="magnitude">
-
-                <xsl:element name="creationInfo">
-                    <xsl:element name="creationTime">
-                        <xsl:value-of select="creationInfo/creationTime"/>
-                    </xsl:element>
-                </xsl:element>
+            <xsl:element name="preferredMagnitude">
 
                 <xsl:element name="magnitude">
                     <xsl:element name="value">

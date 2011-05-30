@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<event publicID="gns2010dwue">
+   <creationInfo>
+      <agencyID/>
+      <updateTime>2011-01-26T02:52:42.680927Z</updateTime>
+   </creationInfo>
+   <preferredOrigin>
+      <time>
+         <value/>
+      </time>
+      <latitude>
+         <value/>
+      </latitude>
+      <longitude>
+         <value/>
+      </longitude>
+      <depth>
+         <value/>
+      </depth>
+      <evaluationMode/>
+      <evaluationStatus/>
+      <preferredMagnitude>
+         <magnitude>
+            <value/>
+         </magnitude>
+         <type/>
+      </preferredMagnitude>
+   </preferredOrigin>
+</event>

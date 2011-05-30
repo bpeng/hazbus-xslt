@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<event publicID="gns2010dwue">
+   <creationInfo>
+      <agencyID>GNS</agencyID>
+      <updateTime>2011-01-26T02:52:42.680927Z</updateTime>
+   </creationInfo>
+   <preferredOrigin>
+      <time>
+         <value>2010-02-25T04:38:43.663583Z</value>
+      </time>
+      <latitude>
+         <value>-46.223454</value>
+      </latitude>
+      <longitude>
+         <value>166.72148</value>
+      </longitude>
+      <depth>
+         <value>10</value>
+      </depth>
+      <evaluationMode>automatic</evaluationMode>
+      <evaluationStatus/>
+      <preferredMagnitude>
+         <magnitude>
+            <value>5.5178546</value>
+         </magnitude>
+         <type>MLv</type>
+      </preferredMagnitude>
+   </preferredOrigin>
+</event>
