@@ -34,7 +34,7 @@
     -->
 
      <xm:xslt-transformer name="sc3-v0.3-to-simple-event"
-        xsl-file="nz/org/geonet/esb/event/xslt/sc3/sc3v0.3toevent.xslt"/>
+        xsl-file="nz/org/geonet/hazbus/event/xslt/sc3/sc3v0.3toevent.xslt"/>
 
     <model name="main">
         <service name="sc3-v0.3-to-event">
