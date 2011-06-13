@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<event publicID="2011a440804">
+   <creationInfo>
+      <agencyID>WEL(Avalon)</agencyID>
+      <updateTime>2011-06-13T04:09:10.621433Z</updateTime>
+   </creationInfo>
+   <preferredOrigin>
+      <time>
+         <value>2011-06-13T02:20:49.940648Z</value>
+      </time>
+      <latitude>
+         <value>-43.593055</value>
+      </latitude>
+      <longitude>
+         <value>172.80766</value>
+      </longitude>
+      <depth>
+         <value>34.53125</value>
+      </depth>
+      <evaluationMode>automatic</evaluationMode>
+      <evaluationStatus/>
+      <preferredMagnitude>
+         <magnitude>
+            <value>6.1056873</value>
+         </magnitude>
+         <type>M</type>
+      </preferredMagnitude>
+   </preferredOrigin>
+</event>

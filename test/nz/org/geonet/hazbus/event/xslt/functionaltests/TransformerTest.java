@@ -77,7 +77,7 @@ public class TransformerTest extends FunctionalTestCase {
         assertTrue("Transformed sc3 = simple event", XMLUnit.compareXML(message.getPayloadAsString(), resultData).similar());
     }
 
-       public void testSC3ToSimpleEventTransformDT2() throws Exception {
+    public void testSC3ToSimpleEventTransformDT2() throws Exception {
         XMLUnit.setIgnoreWhitespace(true);
         XMLUnit.setIgnoreComments(true);
 
@@ -97,7 +97,7 @@ public class TransformerTest extends FunctionalTestCase {
         assertTrue("Transformed sc3 = simple event", XMLUnit.compareXML(message.getPayloadAsString(), resultData).similar());
     }
 
-          public void testSC3ToSimpleEventTransformDT3() throws Exception {
+    public void testSC3ToSimpleEventTransformDT3() throws Exception {
         XMLUnit.setIgnoreWhitespace(true);
         XMLUnit.setIgnoreComments(true);
 
@@ -115,5 +115,25 @@ public class TransformerTest extends FunctionalTestCase {
         assertNotNull("Got message", message);
         assertNull("Got no exceptions", message.getExceptionPayload());
         assertTrue("Transformed sc3 = simple event", XMLUnit.compareXML(message.getPayloadAsString(), resultData).similar());
+    }
+
+    public void testSC3v05ToSimpleEventTransform() throws Exception {
+        XMLUnit.setIgnoreWhitespace(true);
+        XMLUnit.setIgnoreComments(true);
+
+        String srcData = IOUtils.getResourceAsString(
+                "nz/org/geonet/hazbus/event/xslt/sc3/2011a440804.xml", getClass());
+        String resultData = IOUtils.getResourceAsString(
+                "nz/org/geonet/hazbus/event/xslt/sc3/2011a440804-simple.xml", getClass());
+
+        MuleClient client = new MuleClient();
+
+        Map props = new HashMap();
+
+        MuleMessage message = client.send("vm://sc3-v0.5-to-simple-event.in", srcData, props);
+
+        assertNotNull("Got message", message);
+        assertNull("Got no exceptions", message.getExceptionPayload());
+        assertTrue("Transformed sc5 = simple event", XMLUnit.compareXML(message.getPayloadAsString(), resultData).similar());
     }
 }

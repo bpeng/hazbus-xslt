@@ -34,7 +34,10 @@
     -->
 
      <xm:xslt-transformer name="sc3-v0.3-to-simple-event"
-        xsl-file="nz/org/geonet/hazbus/event/xslt/sc3/sc3v0.3toevent.xslt"/>
+     xsl-file="nz/org/geonet/hazbus/event/xslt/sc3/sc3v0.3toevent.xslt"/>
+    
+    <xm:xslt-transformer name="sc3-v0.5-to-simple-event"
+        xsl-file="nz/org/geonet/hazbus/event/xslt/sc3/sc3v0.5toevent.xslt"/>
 
     <model name="main">
         <service name="sc3-v0.3-to-event">
@@ -51,5 +54,21 @@
                 </pass-through-router>
             </outbound>
         </service>
+        
+        <service name="sc3-v0.5-to-event">
+            <inbound>
+                <!-- this endpoint is used by the functional test -->
+                <vm:inbound-endpoint path="sc3-v0.5-to-simple-event.in" synchronous="true">
+                    <transformer ref="sc3-v0.5-to-simple-event"/>
+                </vm:inbound-endpoint>
+            </inbound>
+            <echo-component/>
+            <outbound>
+                <pass-through-router>
+                    <stdio:outbound-endpoint system="OUT"/>
+                </pass-through-router>
+            </outbound>
+        </service>
+        
     </model>
 </mule>
