@@ -107,7 +107,7 @@ xslt template to transform quake events in seiscomp3 xml document into simple ev
                 </xsl:element>
 
                 <xsl:element name="evaluationStatus">
-                    <xsl:value-of select="evalutionStatus"/>
+                    <xsl:value-of select="evaluationStatus"/>
                 </xsl:element>
 
                 <xsl:apply-templates select="magnitude">
