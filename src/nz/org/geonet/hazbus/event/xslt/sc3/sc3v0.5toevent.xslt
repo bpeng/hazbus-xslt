@@ -40,6 +40,9 @@ xslt template to transform quake events in seiscomp3 xml document into simple ev
             <xsl:attribute name="publicID">
                 <xsl:value-of select="$publicID"/>
             </xsl:attribute>
+            <xsl:element name="type">
+                <xsl:value-of select="type" />
+            </xsl:element>
             <xsl:element name="creationInfo">
                 <xsl:element name="agencyID">
                     <xsl:value-of select="creationInfo/agencyID"/>
@@ -47,7 +50,7 @@ xslt template to transform quake events in seiscomp3 xml document into simple ev
    
                 <xsl:variable name="dt"
                     select="xs:dateTime(creationInfo/creationTime), 
-                    xs:dateTime(creationInfo/modificationTime),
+                    xs:dateTime(creationInfo/modificationTime), 
                     xs:dateTime(/seiscomp/EventParameters/origin[@publicID=$preferredOriginID]/creationInfo/creationTime),
                     xs:dateTime(/seiscomp/EventParameters/origin[@publicID=$preferredOriginID]/creationInfo/modificationTime),
                     xs:dateTime(/seiscomp/EventParameters/origin[@publicID=$preferredOriginID]/magnitude[@publicID=$preferredMagnitudeID]/creationInfo/creationTime),

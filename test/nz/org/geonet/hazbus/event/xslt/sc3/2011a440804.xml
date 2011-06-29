@@ -12602,6 +12602,7 @@
     <event publicID="2011a440804">
       <preferredOriginID>NLL.20110613040811.689005.235414</preferredOriginID>
       <preferredMagnitudeID>NLL.20110613040811.689005.235414#netMag.M</preferredMagnitudeID>
+      <type>earthquake</type>
       <creationInfo>
         <agencyID>WEL(Avalon)</agencyID>
         <author>scevent@sc-av.geonet.org.nz</author>
