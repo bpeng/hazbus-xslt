@@ -2,6 +2,7 @@
 <xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:sc3="http://geofon.gfz-potsdam.de/ns/seiscomp3-schema/0.5"
+    xmlns:geonet="http://geonet.org.nz"
     xpath-default-namespace="http://geofon.gfz-potsdam.de/ns/seiscomp3-schema/0.5">
     
 <!--  
@@ -68,6 +69,13 @@ xslt template to transform quake events in seiscomp3 xml document into simple ev
                 <xsl:with-param name="preferredMagnitudeID" select="$preferredMagnitudeID"/>
                 <xsl:with-param name="publicID" select="$publicID"/>
             </xsl:apply-templates>
+            
+            <xsl:variable name="evaluationMode" select="../origin[@publicID=$preferredOriginID]/evaluationMode"/>
+            <xsl:variable name="evaluationStatus" select="../origin[@publicID=$preferredOriginID]/evaluationStatus"/>
+            
+            <xsl:element name="status">
+                <xsl:value-of select="geonet:publicStatus($evaluationMode,$evaluationStatus,type)"/>
+            </xsl:element>
 
         </xsl:element>
     </xsl:template>
@@ -105,14 +113,6 @@ xslt template to transform quake events in seiscomp3 xml document into simple ev
                     </xsl:element>
                 </xsl:element>
 
-                <xsl:element name="evaluationMode">
-                    <xsl:value-of select="evaluationMode"/>
-                </xsl:element>
-
-                <xsl:element name="evaluationStatus">
-                    <xsl:value-of select="evaluationStatus"/>
-                </xsl:element>
-
                 <xsl:apply-templates select="magnitude">
                     <xsl:with-param name="preferredMagnitudeID" select="$preferredMagnitudeID"/>
                 </xsl:apply-templates>
@@ -141,5 +141,19 @@ xslt template to transform quake events in seiscomp3 xml document into simple ev
             </xsl:element>
         </xsl:if>
     </xsl:template>
+  
+  <xsl:function name="geonet:publicStatus">
+      <xsl:param name="evaluationMode" as="xs:string?"/>
+      <xsl:param name="evaluationStatus" as="xs:string?"/>
+      <xsl:param name="type" as="xs:string?"/>
+      
+      <xsl:choose>
+          <xsl:when test="$type = 'not existing'">deleted</xsl:when>
+          <xsl:when test="$type = 'duplicate'">duplicate</xsl:when>
+          <xsl:when test="$evaluationMode = 'manual'">reviewed</xsl:when>
+          <xsl:when test="$evaluationStatus = 'confirmed'">reviewed</xsl:when>
+          <xsl:otherwise>automatic</xsl:otherwise>
+      </xsl:choose>
+  </xsl:function>
 
  </xsl:stylesheet>

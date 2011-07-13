@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <event publicID="2011a440804">
-   <type>earthquake</type>
+   <type>duplicate</type>
    <creationInfo>
       <agencyID>WEL(Avalon)</agencyID>
       <updateTime>2011-06-13T04:09:10.621433Z</updateTime>
@@ -25,5 +25,5 @@
          <type>M</type>
       </preferredMagnitude>
    </preferredOrigin>
-   <status>reviewed</status>
+   <status>duplicate</status>
 </event>
