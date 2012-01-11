@@ -18,13 +18,14 @@
  */
 package nz.org.geonet.hazbus.event.xslt.functionaltests;
 
-import java.util.HashMap;
-import java.util.Map;
 import org.custommonkey.xmlunit.XMLUnit;
+import org.junit.Test;
 import org.mule.api.MuleMessage;
-import org.mule.module.client.MuleClient;
-import org.mule.tck.FunctionalTestCase;
+import org.mule.api.client.MuleClient;
+import org.mule.tck.junit4.FunctionalTestCase;
 import org.mule.util.IOUtils;
+
+import static org.junit.Assert.*;
 
 /**
  *
@@ -34,163 +35,171 @@ public class TransformerTest extends FunctionalTestCase {
 
     @Override
     protected String getConfigResources() {
-        return "conf/mule-testing-config.xml";
+        return "mule-testing-config.xml";
     }
 
+    @Test
     public void testSC3ToSimpleEventTransform() throws Exception {
         XMLUnit.setIgnoreWhitespace(true);
         XMLUnit.setIgnoreComments(true);
 
         String srcData = IOUtils.getResourceAsString(
-                "nz/org/geonet/hazbus/event/xslt/sc3/3266622.ms.xml", getClass());
+                "src/test/java/nz/org/geonet/hazbus/event/xslt/sc3/3266622.ms.xml", getClass());
         String resultData = IOUtils.getResourceAsString(
-                "nz/org/geonet/hazbus/event/xslt/sc3/simple-event.xml", getClass());
+                "src/test/java/nz/org/geonet/hazbus/event/xslt/sc3/simple-event.xml", getClass());
 
-        MuleClient client = new MuleClient();
+        MuleClient client = muleContext.getClient();
 
-        Map props = new HashMap();
+        client.dispatch("vm://sc3-v0.3-to-simple-event.in", srcData, null);
 
-        MuleMessage message = client.send("vm://sc3-v0.3-to-simple-event.in", srcData, props);
+        MuleMessage message = client.request("vm://sc3-v0.3-to-simple-event.out", RECEIVE_TIMEOUT);
 
         assertNotNull("Got message", message);
         assertNull("Got no exceptions", message.getExceptionPayload());
         assertTrue("Transformed sc3 = simple event", XMLUnit.compareXML(message.getPayloadAsString(), resultData).similar());
     }
 
+    @Test
     public void testSC3ToSimpleEventTransformDT1() throws Exception {
         XMLUnit.setIgnoreWhitespace(true);
         XMLUnit.setIgnoreComments(true);
 
         String srcData = IOUtils.getResourceAsString(
-                "nz/org/geonet/hazbus/event/xslt/sc3/3266622-dt1.ms.xml", getClass());
+                "src/test/java/nz/org/geonet/hazbus/event/xslt/sc3/3266622-dt1.ms.xml", getClass());
         String resultData = IOUtils.getResourceAsString(
-                "nz/org/geonet/hazbus/event/xslt/sc3/simple-event-dt1.xml", getClass());
+                "src/test/java/nz/org/geonet/hazbus/event/xslt/sc3/simple-event-dt1.xml", getClass());
 
-        MuleClient client = new MuleClient();
+        MuleClient client = muleContext.getClient();
 
-        Map props = new HashMap();
+        client.dispatch("vm://sc3-v0.3-to-simple-event.in", srcData, null);
 
-        MuleMessage message = client.send("vm://sc3-v0.3-to-simple-event.in", srcData, props);
+        MuleMessage message = client.request("vm://sc3-v0.3-to-simple-event.out", RECEIVE_TIMEOUT);
 
         assertNotNull("Got message", message);
         assertNull("Got no exceptions", message.getExceptionPayload());
         assertTrue("Transformed sc3 = simple event", XMLUnit.compareXML(message.getPayloadAsString(), resultData).similar());
     }
 
+    @Test
     public void testSC3ToSimpleEventTransformDT2() throws Exception {
         XMLUnit.setIgnoreWhitespace(true);
         XMLUnit.setIgnoreComments(true);
 
         String srcData = IOUtils.getResourceAsString(
-                "nz/org/geonet/hazbus/event/xslt/sc3/3266622-dt2.ms.xml", getClass());
+                "src/test/java/nz/org/geonet/hazbus/event/xslt/sc3/3266622-dt2.ms.xml", getClass());
         String resultData = IOUtils.getResourceAsString(
-                "nz/org/geonet/hazbus/event/xslt/sc3/simple-event-dt2.xml", getClass());
+                "src/test/java/nz/org/geonet/hazbus/event/xslt/sc3/simple-event-dt2.xml", getClass());
 
-        MuleClient client = new MuleClient();
+        MuleClient client = muleContext.getClient();
 
-        Map props = new HashMap();
+        client.dispatch("vm://sc3-v0.3-to-simple-event.in", srcData, null);
 
-        MuleMessage message = client.send("vm://sc3-v0.3-to-simple-event.in", srcData, props);
+        MuleMessage message = client.request("vm://sc3-v0.3-to-simple-event.out", RECEIVE_TIMEOUT);
 
         assertNotNull("Got message", message);
         assertNull("Got no exceptions", message.getExceptionPayload());
         assertTrue("Transformed sc3 = simple event", XMLUnit.compareXML(message.getPayloadAsString(), resultData).similar());
     }
 
+    @Test
     public void testSC3ToSimpleEventTransformDT3() throws Exception {
         XMLUnit.setIgnoreWhitespace(true);
         XMLUnit.setIgnoreComments(true);
 
         String srcData = IOUtils.getResourceAsString(
-                "nz/org/geonet/hazbus/event/xslt/sc3/3266622-dt3.ms.xml", getClass());
+                "src/test/java/nz/org/geonet/hazbus/event/xslt/sc3/3266622-dt3.ms.xml", getClass());
         String resultData = IOUtils.getResourceAsString(
-                "nz/org/geonet/hazbus/event/xslt/sc3/simple-event-dt3.xml", getClass());
+                "src/test/java/nz/org/geonet/hazbus/event/xslt/sc3/simple-event-dt3.xml", getClass());
 
-        MuleClient client = new MuleClient();
+        MuleClient client = muleContext.getClient();
 
-        Map props = new HashMap();
+        client.dispatch("vm://sc3-v0.3-to-simple-event.in", srcData, null);
 
-        MuleMessage message = client.send("vm://sc3-v0.3-to-simple-event.in", srcData, props);
+        MuleMessage message = client.request("vm://sc3-v0.3-to-simple-event.out", RECEIVE_TIMEOUT);
 
         assertNotNull("Got message", message);
         assertNull("Got no exceptions", message.getExceptionPayload());
         assertTrue("Transformed sc3 = simple event", XMLUnit.compareXML(message.getPayloadAsString(), resultData).similar());
     }
 
+    @Test
     public void testSC3v05ToSimpleEventTransform() throws Exception {
         XMLUnit.setIgnoreWhitespace(true);
         XMLUnit.setIgnoreComments(true);
 
         String srcData = IOUtils.getResourceAsString(
-                "nz/org/geonet/hazbus/event/xslt/sc3/2011a440804.xml", getClass());
+                "src/test/java/nz/org/geonet/hazbus/event/xslt/sc3/2011a440804.xml", getClass());
         String resultData = IOUtils.getResourceAsString(
-                "nz/org/geonet/hazbus/event/xslt/sc3/2011a440804-simple.xml", getClass());
+                "src/test/java/nz/org/geonet/hazbus/event/xslt/sc3/2011a440804-simple.xml", getClass());
 
-        MuleClient client = new MuleClient();
+        MuleClient client = muleContext.getClient();
 
-        Map props = new HashMap();
+        client.dispatch("vm://sc3-v0.5-to-simple-event.in", srcData, null);
 
-        MuleMessage message = client.send("vm://sc3-v0.5-to-simple-event.in", srcData, props);
+        MuleMessage message = client.request("vm://sc3-v0.5-to-simple-event.out", RECEIVE_TIMEOUT);
 
         assertNotNull("Got message", message);
         assertNull("Got no exceptions", message.getExceptionPayload());
         assertTrue("Transformed sc5 = simple event", XMLUnit.compareXML(message.getPayloadAsString(), resultData).similar());
     }
 
+    @Test
     public void testSC3v05ToSimpleDuplicateEventTransform() throws Exception {
         XMLUnit.setIgnoreWhitespace(true);
         XMLUnit.setIgnoreComments(true);
 
         String srcData = IOUtils.getResourceAsString(
-                "nz/org/geonet/hazbus/event/xslt/sc3/2011a440804-duplicate.xml", getClass());
+                "src/test/java/nz/org/geonet/hazbus/event/xslt/sc3/2011a440804-duplicate.xml", getClass());
         String resultData = IOUtils.getResourceAsString(
-                "nz/org/geonet/hazbus/event/xslt/sc3/2011a440804-duplicate-simple.xml", getClass());
+                "src/test/java/nz/org/geonet/hazbus/event/xslt/sc3/2011a440804-duplicate-simple.xml", getClass());
 
-        MuleClient client = new MuleClient();
+        MuleClient client = muleContext.getClient();
 
-        Map props = new HashMap();
+        client.dispatch("vm://sc3-v0.5-to-simple-event.in", srcData, null);
 
-        MuleMessage message = client.send("vm://sc3-v0.5-to-simple-event.in", srcData, props);
+        MuleMessage message = client.request("vm://sc3-v0.5-to-simple-event.out", RECEIVE_TIMEOUT);
 
         assertNotNull("Got message", message);
         assertNull("Got no exceptions", message.getExceptionPayload());
         assertTrue("Transformed sc5 = simple event", XMLUnit.compareXML(message.getPayloadAsString(), resultData).similar());
     }
 
+    @Test
     public void testSC3v05ToSimpleAutomaticEventTransform() throws Exception {
         XMLUnit.setIgnoreWhitespace(true);
         XMLUnit.setIgnoreComments(true);
 
         String srcData = IOUtils.getResourceAsString(
-                "nz/org/geonet/hazbus/event/xslt/sc3/2011a440804-automatic.xml", getClass());
+                "src/test/java/nz/org/geonet/hazbus/event/xslt/sc3/2011a440804-automatic.xml", getClass());
         String resultData = IOUtils.getResourceAsString(
-                "nz/org/geonet/hazbus/event/xslt/sc3/2011a440804-automatic-simple.xml", getClass());
+                "src/test/java/nz/org/geonet/hazbus/event/xslt/sc3/2011a440804-automatic-simple.xml", getClass());
 
-        MuleClient client = new MuleClient();
+        MuleClient client = muleContext.getClient();
 
-        Map props = new HashMap();
+        client.dispatch("vm://sc3-v0.5-to-simple-event.in", srcData, null);
 
-        MuleMessage message = client.send("vm://sc3-v0.5-to-simple-event.in", srcData, props);
+        MuleMessage message = client.request("vm://sc3-v0.5-to-simple-event.out", RECEIVE_TIMEOUT);
 
         assertNotNull("Got message", message);
         assertNull("Got no exceptions", message.getExceptionPayload());
         assertTrue("Transformed sc5 = simple event", XMLUnit.compareXML(message.getPayloadAsString(), resultData).similar());
     }
 
+    @Test
     public void testSC3v05ToSimpleDeletedEventTransform() throws Exception {
         XMLUnit.setIgnoreWhitespace(true);
         XMLUnit.setIgnoreComments(true);
 
         String srcData = IOUtils.getResourceAsString(
-                "nz/org/geonet/hazbus/event/xslt/sc3/2011a440804-deleted.xml", getClass());
+                "src/test/java/nz/org/geonet/hazbus/event/xslt/sc3/2011a440804-deleted.xml", getClass());
         String resultData = IOUtils.getResourceAsString(
-                "nz/org/geonet/hazbus/event/xslt/sc3/2011a440804-deleted-simple.xml", getClass());
+                "src/test/java/nz/org/geonet/hazbus/event/xslt/sc3/2011a440804-deleted-simple.xml", getClass());
 
-        MuleClient client = new MuleClient();
+        MuleClient client = muleContext.getClient();
 
-        Map props = new HashMap();
+        client.dispatch("vm://sc3-v0.5-to-simple-event.in", srcData, null);
 
-        MuleMessage message = client.send("vm://sc3-v0.5-to-simple-event.in", srcData, props);
+        MuleMessage message = client.request("vm://sc3-v0.5-to-simple-event.out", RECEIVE_TIMEOUT);
 
         assertNotNull("Got message", message);
         assertNull("Got no exceptions", message.getExceptionPayload());
