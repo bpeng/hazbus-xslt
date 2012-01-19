@@ -17,8 +17,6 @@
  *
  */
 
-
-
 package nz.org.geonet.hazbus.event.xslt.functionaltests;
 
 //~--- non-JDK imports --------------------------------------------------------

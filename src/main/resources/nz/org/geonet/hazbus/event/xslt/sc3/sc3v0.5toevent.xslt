@@ -112,6 +112,12 @@ xslt template to transform quake events in seiscomp3 xml document into simple ev
                         <xsl:value-of select="depth/value"/>
                     </xsl:element>
                 </xsl:element>
+                
+                <xsl:element name="quality">
+                    <xsl:element name="usedPhaseCount">
+                        <xsl:value-of select="quality/usedPhaseCount"/>
+                    </xsl:element>
+                </xsl:element>
 
                 <xsl:apply-templates select="magnitude">
                     <xsl:with-param name="preferredMagnitudeID" select="$preferredMagnitudeID"/>

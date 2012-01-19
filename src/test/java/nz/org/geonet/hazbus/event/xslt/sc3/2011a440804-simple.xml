@@ -18,6 +18,9 @@
       <depth>
          <value>34.53125</value>
       </depth>
+       <quality>
+           <usedPhaseCount>107</usedPhaseCount>
+       </quality>
       <preferredMagnitude>
          <magnitude>
             <value>6.1056873</value>
