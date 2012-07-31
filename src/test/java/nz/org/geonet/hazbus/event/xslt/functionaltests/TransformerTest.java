@@ -157,6 +157,29 @@ public class TransformerTest extends FunctionalTestCase {
     }
 
     @Test
+    public void testSC3v06ToSimpleEventTransform() throws Exception {
+        XMLUnit.setIgnoreWhitespace(true);
+        XMLUnit.setIgnoreComments(true);
+
+        String srcData =
+                IOUtils.getResourceAsString("src/test/java/nz/org/geonet/hazbus/event/xslt/sc3/2012p572844-201207302254089234.xml",
+                        getClass());
+        String resultData =
+                IOUtils.getResourceAsString("src/test/java/nz/org/geonet/hazbus/event/xslt/sc3/2012p572844-simple.xml",
+                        getClass());
+        MuleClient client = muleContext.getClient();
+
+        client.dispatch("vm://sc3-v0.6-to-simple-event.in", srcData, null);
+
+        MuleMessage message = client.request("vm://sc3-v0.6-to-simple-event.out", RECEIVE_TIMEOUT);
+
+        assertNotNull("Got message", message);
+        assertNull("Got no exceptions", message.getExceptionPayload());
+        assertTrue("Transformed sc6 = simple event",
+                XMLUnit.compareXML(message.getPayloadAsString(), resultData).similar());
+    }
+
+    @Test
     public void testSC3v05ToSimpleDuplicateEventTransform() throws Exception {
         XMLUnit.setIgnoreWhitespace(true);
         XMLUnit.setIgnoreComments(true);

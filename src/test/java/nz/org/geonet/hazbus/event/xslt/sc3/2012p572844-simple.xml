@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<event publicID="2012p572844">
+   <type/>
+   <creationInfo>
+      <agencyID>WEL(GNS_Primary)</agencyID>
+      <updateTime>2012-07-30T22:54:08.921246Z</updateTime>
+   </creationInfo>
+   <preferredOrigin>
+      <time>
+         <value>2012-07-30T22:51:48.695748Z</value>
+      </time>
+      <latitude>
+         <value>-41.779526</value>
+      </latitude>
+      <longitude>
+         <value>174.18401</value>
+      </longitude>
+      <depth>
+         <value>12.052734</value>
+      </depth>
+      <quality>
+         <usedPhaseCount>28</usedPhaseCount>
+      </quality>
+      <preferredMagnitude>
+         <magnitude>
+            <value>2.5559611</value>
+         </magnitude>
+         <type>M</type>
+      </preferredMagnitude>
+   </preferredOrigin>
+   <status>automatic</status>
+</event>

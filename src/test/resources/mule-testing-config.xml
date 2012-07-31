@@ -38,6 +38,9 @@
     <mule-xml:xslt-transformer name="sc3-v0.5-to-simple-event"
         xsl-file="nz/org/geonet/hazbus/event/xslt/sc3/sc3v0.5toevent.xslt"/>
 
+    <mule-xml:xslt-transformer name="sc3-v0.6-to-simple-event"
+                               xsl-file="nz/org/geonet/hazbus/event/xslt/sc3/sc3v0.6toevent.xslt"/>
+
     <flow name="0.3">
         <vm:inbound-endpoint path="sc3-v0.3-to-simple-event.in"/>
 
@@ -52,5 +55,13 @@
         <transformer ref="sc3-v0.5-to-simple-event"/>
         
         <vm:outbound-endpoint path="sc3-v0.5-to-simple-event.out"/>
+    </flow>
+
+    <flow name="0.6">
+        <vm:inbound-endpoint path="sc3-v0.6-to-simple-event.in"/>
+
+        <transformer ref="sc3-v0.6-to-simple-event"/>
+
+        <vm:outbound-endpoint path="sc3-v0.6-to-simple-event.out"/>
     </flow>
 </mule>
